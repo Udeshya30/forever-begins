@@ -1,0 +1,229 @@
+@use '../styles/variables.scss' as *;
+
+.gallery {
+  min-height: 100vh;
+}
+
+.gallery-section {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-ivory;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+// Filters
+.gallery-filters {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-3xl;
+  flex-wrap: wrap;
+}
+
+.gallery-filter {
+  padding: $spacing-sm $spacing-lg;
+  background-color: $primary-white;
+  color: $primary-brown;
+  border: 2px solid $primary-champagne;
+  border-radius: $radius-md;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all $transition-base;
+
+  &:hover {
+    border-color: $primary-gold;
+    color: $primary-gold;
+  }
+
+  &.active {
+    background-color: $primary-gold;
+    color: $primary-white;
+    border-color: $primary-gold;
+  }
+}
+
+// Masonry Grid
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  auto-rows: auto;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include respond-to('lg') {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-lg;
+  cursor: pointer;
+  @include slide-up;
+  aspect-ratio: 1;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform $transition-base;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+.gallery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba($primary-brown, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity $transition-base;
+}
+
+.gallery-overlay-text {
+  color: $primary-white;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+// Lightbox
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-modal;
+  padding: $spacing-lg;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.lightbox-content {
+  position: relative;
+  width: 100%;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.lightbox-image {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: $radius-lg;
+  animation: slideUp 0.3s ease-out;
+}
+
+.lightbox-title {
+  color: $primary-white;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  margin: 0;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: $spacing-lg;
+  right: $spacing-lg;
+  background: none;
+  border: none;
+  color: $primary-white;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: rotate(90deg);
+  }
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba($primary-gold, 0.3);
+  border: none;
+  color: $primary-white;
+  cursor: pointer;
+  padding: $spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all $transition-base;
+  z-index: 5;
+
+  &:hover {
+    background-color: rgba($primary-gold, 0.7);
+  }
+
+  &.lightbox-prev {
+    left: $spacing-lg;
+  }
+
+  &.lightbox-next {
+    right: $spacing-lg;
+  }
+
+  @include respond-to('sm') {
+    padding: $spacing-sm;
+
+    &.lightbox-prev {
+      left: $spacing-md;
+    }
+
+    &.lightbox-next {
+      right: $spacing-md;
+    }
+  }
+}

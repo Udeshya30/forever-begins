@@ -1,0 +1,35 @@
+@use '../styles/variables.scss' as *;
+
+.section-heading {
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+  @include slide-up;
+
+  @include respond-to('md') {
+    margin-bottom: $spacing-4xl;
+  }
+}
+
+.section-heading-accent {
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, transparent, $primary-gold, transparent);
+  margin: 0 auto $spacing-lg;
+}
+
+.section-heading-title {
+  margin: 0 0 $spacing-md 0;
+  color: $primary-brown;
+}
+
+.section-heading-subtitle {
+  color: $color-text-secondary;
+  font-size: $font-size-lg;
+  font-weight: 300;
+  margin: 0;
+  letter-spacing: 0.02em;
+
+  @include respond-to('sm') {
+    font-size: $font-size-base;
+  }
+}

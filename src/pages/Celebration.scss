@@ -1,0 +1,256 @@
+@use '../styles/variables.scss' as *;
+
+.celebration {
+  min-height: 100vh;
+}
+
+.celebration-section {
+  padding: clamp(5rem, 8vw, 8rem) $spacing-md;
+  background-color: $primary-ivory;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+// Event Card
+.event-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #fffdfa;
+  padding: clamp(1.75rem, 4vw, 3.25rem);
+  border: 1px solid #d5c4ad;
+  box-shadow: 0 12px 35px rgba($primary-brown, 0.06);
+  transition: box-shadow $transition-base, transform $transition-base;
+  @include slide-up;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba($primary-gold, 0.16);
+    pointer-events: none;
+  }
+
+  &:nth-child(even) {
+    background-color: #f5ebe5;
+  }
+
+  &:hover {
+    box-shadow: 0 18px 40px rgba($primary-brown, 0.12);
+    transform: translateY(-4px);
+  }
+}
+
+.event-header {
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  padding-bottom: $spacing-xl;
+  border-bottom: 1px solid #d5c4ad;
+}
+
+.event-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  > span:not(.event-number) {
+    width: 36px;
+    height: 1px;
+    background-color: $primary-gold;
+  }
+}
+
+.event-number {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid $primary-gold;
+  border-radius: 50%;
+  color: $primary-gold;
+  font-family: $font-serif;
+  font-size: $font-size-base;
+}
+
+.event-eyebrow {
+  margin: 0 0 $spacing-sm;
+  color: $primary-gold;
+  font-size: $font-size-xs;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.event-name {
+  font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+  color: $primary-brown;
+  margin: 0 0 $spacing-md;
+  font-family: $font-serif;
+  font-weight: 500;
+}
+
+.event-description {
+  max-width: 35ch;
+  margin: 0 auto;
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: 1.7;
+}
+
+.event-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to('sm') {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.event-detail {
+  display: flex;
+  gap: $spacing-sm;
+  align-items: flex-start;
+}
+
+.event-detail-icon {
+  color: $primary-gold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.event-detail-label {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+  font-weight: 600;
+}
+
+.event-detail-value {
+  font-size: $font-size-base;
+  color: $primary-brown;
+  margin: $spacing-xs 0 0 0;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.event-detail-address {
+  margin: $spacing-xs 0 0;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.event-instructions {
+  font-size: $font-size-sm;
+  background-color: rgba($primary-champagne, 0.45);
+  padding: $spacing-md $spacing-lg;
+  margin-bottom: $spacing-lg;
+  color: $color-text-primary;
+  border-left: 2px solid $primary-gold;
+}
+
+.event-map-link {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-top: auto;
+  padding: $spacing-sm 0;
+  border-bottom: 1px solid $primary-gold;
+  color: $primary-gold;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  svg {
+    transition: transform $transition-base;
+  }
+
+  &:hover svg {
+    transform: translate(3px, -3px);
+  }
+}
+
+// FAQ Section
+.celebration-faq {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-white;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  margin-bottom: $spacing-lg;
+  border-bottom: 1px solid $primary-champagne;
+  @include slide-up;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-lg 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  color: $primary-brown;
+  text-align: left;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $primary-gold;
+  }
+
+  &.open {
+    color: $primary-gold;
+  }
+}
+
+.faq-icon {
+  font-size: $font-size-2xl;
+  font-weight: 300;
+  color: $primary-gold;
+  transition: transform $transition-base;
+}
+
+.faq-question.open .faq-icon {
+  transform: scale(1.2);
+}
+
+.faq-answer {
+  padding: 0 0 $spacing-lg 0;
+  color: $color-text-primary;
+  line-height: 1.8;
+  animation: slideUp 0.3s ease-out;
+}

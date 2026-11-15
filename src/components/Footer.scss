@@ -1,0 +1,142 @@
+@use '../styles/variables.scss' as *;
+
+.footer {
+  background-color: $primary-brown;
+  color: $primary-white;
+  padding: $spacing-4xl $spacing-md;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-3xl;
+  margin-bottom: $spacing-3xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer-section {
+  h3,
+  h4 {
+    color: $primary-white;
+    margin-bottom: $spacing-md;
+    text-transform: uppercase;
+    font-size: $font-size-lg;
+    letter-spacing: 0.05em;
+  }
+
+  h3 {
+    font-family: $font-serif;
+    font-size: $font-size-2xl;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $primary-champagne;
+    margin: 0;
+  }
+}
+
+.footer-subtitle {
+  color: $primary-champagne !important;
+  font-size: $font-size-sm;
+  font-style: italic;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: $spacing-md;
+
+    a {
+      color: $primary-champagne;
+      transition: color $transition-base;
+
+      &:hover {
+        color: $primary-white;
+      }
+    }
+  }
+}
+
+.footer-divider {
+  height: 1px;
+  background: rgba($primary-gold, 0.3);
+  margin: $spacing-3xl 0;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  text-align: center;
+
+  @include respond-to('md') {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.footer-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+
+  @include respond-to('md') {
+    justify-content: flex-start;
+  }
+
+  p {
+    margin: 0;
+    color: $primary-champagne;
+    @include flex-center;
+    gap: $spacing-sm;
+  }
+
+  .heart-icon {
+    color: #ff6b9d;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+}
+
+.footer-copyright {
+  margin: 0;
+  color: $primary-champagne;
+  font-size: $font-size-sm;
+  text-align: center;
+
+  @include respond-to('md') {
+    text-align: right;
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}

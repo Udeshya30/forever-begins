@@ -1,0 +1,309 @@
+@use 'variables.scss' as *;
+
+// Google Fonts Import
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
+
+// Reset & Base Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+body {
+  font-family: $font-sans;
+  background-color: $color-background;
+  color: $color-text-primary;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: $spacing-lg;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4 {
+  font-size: $font-size-2xl;
+  
+  @include respond-to('sm') {
+    font-size: $font-size-xl;
+  }
+}
+
+h5 {
+  font-size: $font-size-xl;
+}
+
+h6 {
+  font-size: $font-size-lg;
+}
+
+p {
+  margin-bottom: $spacing-md;
+  color: inherit;
+  line-height: 1.8;
+}
+
+a {
+  color: $primary-gold;
+  text-decoration: none;
+  transition: color $transition-base;
+
+  &:hover {
+    color: darken($primary-gold, 10%);
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Buttons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem $spacing-xl;
+  border: none;
+  border-radius: $radius-sm;
+  font-family: $font-sans;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+
+  &-primary {
+    background-color: $primary-gold;
+    color: $primary-white;
+
+    &:hover {
+      background-color: darken($primary-gold, 10%);
+      color: $primary-white;
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+:focus-visible {
+    outline: 3px solid #B49A72;
+    outline-offset: 4px;
+  }
+
+  &-secondary {
+    background-color: transparent;
+    color: $primary-gold;
+    border: 2px solid $primary-gold;
+
+    &:hover {
+      background-color: $primary-gold;
+      color: $primary-white;
+    }
+  }
+
+  &-outline {
+    background-color: transparent;
+    color: $primary-brown;
+    border: 2px solid $primary-brown;
+
+    &:hover {
+      background-color: $primary-brown;
+      color: $primary-white;
+    }
+  }
+
+  &-sm {
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+  }
+
+  &-lg {
+    padding: $spacing-lg $spacing-2xl;
+    font-size: $font-size-lg;
+  }
+}
+
+// Container
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @include respond-to('sm') {
+    padding: 0 $spacing-lg;
+  }
+
+  @include respond-to('lg') {
+    padding: 0 $spacing-lg;
+  }
+}
+
+// Sections
+section {
+  padding: $spacing-4xl $spacing-md;
+
+  @include respond-to('sm') {
+    padding: $spacing-4xl $spacing-lg;
+  }
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-2xl;
+  }
+}
+
+// Grid
+.grid {
+  display: grid;
+  gap: $spacing-2xl;
+
+  &-2 {
+    grid-template-columns: 1fr;
+
+    @include respond-to('md') {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &-3 {
+    grid-template-columns: 1fr;
+
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to('lg') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &-4 {
+    grid-template-columns: 1fr;
+
+    @include respond-to('sm') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include respond-to('lg') {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+// Utilities
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.mt {
+  &-sm { margin-top: $spacing-md; }
+  &-md { margin-top: $spacing-lg; }
+  &-lg { margin-top: $spacing-2xl; }
+  &-xl { margin-top: $spacing-3xl; }
+}
+
+.mb {
+  &-sm { margin-bottom: $spacing-md; }
+  &-md { margin-bottom: $spacing-lg; }
+  &-lg { margin-bottom: $spacing-2xl; }
+  &-xl { margin-bottom: $spacing-3xl; }
+}
+
+.pt {
+  &-sm { padding-top: $spacing-md; }
+  &-md { padding-top: $spacing-lg; }
+  &-lg { padding-top: $spacing-2xl; }
+  &-xl { padding-top: $spacing-3xl; }
+}
+
+.pb {
+  &-sm { padding-bottom: $spacing-md; }
+  &-md { padding-bottom: $spacing-lg; }
+  &-lg { padding-bottom: $spacing-2xl; }
+  &-xl { padding-bottom: $spacing-3xl; }
+}
+
+// Divider
+.divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    $primary-gold,
+    transparent
+  );
+  margin: $spacing-3xl 0;
+}
+
+// Scroll to Top Button
+.scroll-to-top {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  width: 50px;
+  height: 50px;
+  background-color: $primary-gold;
+  color: $primary-white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  @include flex-center;
+  display: none;
+  z-index: $z-sticky;
+  box-shadow: $shadow-lg;
+  transition: all $transition-base;
+
+  &.visible {
+    display: flex;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-xl;
+  }
+
+  @include respond-to('md') {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+  }
+}

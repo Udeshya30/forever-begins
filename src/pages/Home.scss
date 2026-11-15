@@ -1,0 +1,178 @@
+@use '../styles/variables.scss' as *;
+
+.home {
+  min-height: 100vh;
+}
+
+// Hero Names
+.hero-names {
+  animation: slideUp 0.8s ease-out;
+}
+
+.hero-names-label {
+  color: $primary-white;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: $spacing-md;
+}
+
+.hero-names-text {
+  font-family: $font-serif;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.2;
+
+}
+
+.hero-names-and {
+  display: inline;
+  font-weight: 300;
+  font-size: 0.7em;
+  margin: 0 $spacing-sm;
+}
+
+// Countdown Section
+.home-countdown {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-champagne;
+  border-top: 1px solid $primary-champagne;
+  border-bottom: 1px solid $primary-champagne;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.countdown-wrapper {
+  text-align: center;
+}
+
+.countdown-heading {
+  font-size: $font-size-3xl;
+  color: $primary-brown;
+  margin-bottom: $spacing-2xl;
+
+  @include respond-to('sm') {
+    font-size: $font-size-2xl;
+  }
+}
+
+.countdown-date {
+  margin-top: $spacing-2xl;
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  letter-spacing: 0.02em;
+}
+
+// Invitation Section
+.home-invitation {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-ivory;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.invitation-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+
+  @include respond-to('lg') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.invitation-text {
+  order: 2;
+
+  @include respond-to('lg') {
+    order: 1;
+  }
+}
+
+.invitation-message {
+  font-size: $font-size-lg;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+  line-height: 1.8;
+
+  @include respond-to('sm') {
+    font-size: $font-size-base;
+  }
+}
+
+.invitation-subtext {
+  font-size: $font-size-base;
+  color: $color-text-secondary;
+  line-height: 1.8;
+}
+
+.invitation-image {
+  order: 1;
+  border-radius: 45% 45% $radius-sm $radius-sm;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+  @include slide-up;
+
+  @include respond-to('lg') {
+    order: 2;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// CTA Section
+.home-cta {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-brown;
+  color: $primary-white;
+  text-align: center;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+
+  h2 {
+    color: $primary-white;
+    margin-bottom: $spacing-md;
+  }
+
+  p {
+    color: rgba($primary-white, 0.9);
+    font-size: $font-size-lg;
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: $spacing-lg;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .btn-secondary {
+    background-color: $primary-white;
+    color: $primary-brown;
+    border-color: $primary-white;
+
+    &:hover {
+      background-color: $primary-champagne;
+      color: $primary-brown;
+    }
+  }
+}

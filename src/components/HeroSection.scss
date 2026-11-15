@@ -1,0 +1,78 @@
+@use '../styles/variables.scss' as *;
+
+.hero-section {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-color: $primary-brown;
+  padding: $spacing-4xl $spacing-md;
+  overflow: hidden;
+
+  @include respond-to('md') {
+    min-height: 68vh;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(29, 21, 19, 0.7);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: $primary-white;
+  max-width: 900px;
+  margin: 0 auto;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+  @include fade-in;
+}
+
+.hero-title {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  font-weight: 500;
+  margin-bottom: $spacing-lg;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+
+}
+
+.hero-subtitle {
+  color: $primary-white;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  margin-bottom: $spacing-lg;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.05em;
+
+}
+
+.hero-description {
+  font-size: $font-size-lg;
+  line-height: 1.8;
+  margin-bottom: $spacing-2xl;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  color: rgba($primary-white, 0.95);
+
+  @include respond-to('sm') {
+    font-size: $font-size-base;
+  }
+}
+
+.hero-children {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-lg;
+  flex-wrap: wrap;
+
+}

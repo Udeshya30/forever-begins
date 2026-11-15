@@ -1,0 +1,300 @@
+@use '../styles/variables.scss' as *;
+
+.surprise {
+  min-height: 100vh;
+}
+
+// Introduction Section
+.surprise-intro {
+  padding: $spacing-4xl $spacing-md;
+  background: linear-gradient(135deg, $primary-white 0%, $primary-ivory 100%);
+  text-align: center;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.intro-content {
+  max-width: 600px;
+  margin: 0 auto;
+  @include slide-up;
+}
+
+.intro-icon {
+  color: $primary-gold;
+  margin-bottom: $spacing-lg;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.intro-heading {
+  color: $primary-brown;
+  margin-bottom: $spacing-md;
+}
+
+.intro-text {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  line-height: 1.8;
+}
+
+// Letter Section
+.surprise-letter {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-ivory;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.letter-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.letter-card {
+  background-color: $primary-white;
+  padding: $spacing-3xl;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  border: 1px solid $primary-champagne;
+  @include slide-up;
+
+  @include respond-to('sm') {
+    padding: $spacing-2xl;
+  }
+}
+
+.letter-header {
+  text-align: center;
+  margin-bottom: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+  border-bottom: 2px solid $primary-gold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.letter-icon {
+  color: $primary-gold;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.letter-greeting {
+  font-size: $font-size-xl;
+  color: $primary-brown;
+  margin: 0;
+  font-weight: 600;
+}
+
+.letter-body {
+  margin-bottom: $spacing-2xl;
+}
+
+.letter-paragraph {
+  font-size: $font-size-base;
+  line-height: 2;
+  color: $color-text-primary;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+
+  &:empty {
+    margin-bottom: 0;
+  }
+}
+
+.letter-footer {
+  text-align: center;
+  padding-top: $spacing-2xl;
+  border-top: 2px solid $primary-gold;
+}
+
+.letter-closing {
+  font-size: $font-size-lg;
+  color: $primary-gold;
+  font-style: italic;
+  margin: 0;
+  font-weight: 500;
+}
+
+// Memories Section
+.surprise-memories {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-white;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.memories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-2xl;
+
+  @include respond-to('md') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.memory-card {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  transition: all $transition-base;
+  @include slide-up;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+    transform: translateY(-4px);
+  }
+}
+
+.memory-image {
+  overflow: hidden;
+  height: 250px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform $transition-base;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+}
+
+.memory-content {
+  padding: $spacing-lg;
+  background-color: $primary-ivory;
+}
+
+.memory-date {
+  font-size: $font-size-sm;
+  color: $primary-gold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: $spacing-sm;
+  font-weight: 600;
+}
+
+.memory-text {
+  font-size: $font-size-base;
+  color: $color-text-primary;
+  margin: 0;
+  line-height: 1.6;
+}
+
+// Video Section
+.surprise-video {
+  padding: $spacing-4xl $spacing-md;
+  background-color: $primary-ivory;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.video-placeholder {
+  max-width: 800px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, $primary-champagne 0%, rgba($primary-gold, 0.1) 100%);
+  border-radius: $radius-lg;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-2xl;
+  text-align: center;
+  border: 2px dashed $primary-gold;
+}
+
+.video-placeholder-text {
+  font-size: $font-size-lg;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-md;
+  font-weight: 500;
+}
+
+.video-placeholder-hint {
+  font-size: $font-size-sm;
+  color: $color-text-light;
+  font-family: monospace;
+  margin: 0;
+}
+
+// Final Message Section
+.surprise-final {
+  padding: $spacing-4xl $spacing-md;
+  background: linear-gradient(135deg, $primary-brown 0%, darken($primary-brown, 5%) 100%);
+  color: $primary-white;
+  text-align: center;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+}
+
+.final-content {
+  max-width: 800px;
+  margin: 0 auto;
+  @include slide-up;
+}
+
+.final-heading {
+  color: $primary-white;
+  margin-bottom: $spacing-2xl;
+}
+
+.final-text-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.final-text {
+  font-size: $font-size-lg;
+  line-height: 2;
+  color: rgba($primary-white, 0.95);
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include respond-to('sm') {
+    font-size: $font-size-base;
+  }
+}
+
+// CTA Section
+.surprise-cta {
+  padding: $spacing-3xl $spacing-md;
+  background-color: $primary-ivory;
+  text-align: center;
+
+  .btn {
+    @include respond-to('sm') {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.1);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}

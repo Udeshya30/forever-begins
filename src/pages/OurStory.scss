@@ -1,0 +1,169 @@
+@use '../styles/variables.scss' as *;
+
+.our-story {
+  min-height: 100vh;
+}
+
+.story-content-wrapper {
+  background-color: $primary-ivory;
+}
+
+.story-section {
+  padding: $spacing-4xl $spacing-md;
+  border-bottom: 1px solid $color-border;
+
+  @include respond-to('md') {
+    padding: $spacing-4xl $spacing-xl;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-3xl;
+  align-items: center;
+
+  @include respond-to('lg') {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &.even {
+    @include respond-to('lg') {
+      grid-template-columns: 1fr 1fr;
+
+      .story-image {
+        order: 2;
+      }
+
+      .story-content {
+        order: 1;
+        text-align: right;
+
+        .section-heading {
+          text-align: right;
+
+          .section-heading-accent {
+            margin-left: auto;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &.odd {
+    @include respond-to('lg') {
+      .story-content {
+        text-align: left;
+      }
+    }
+  }
+}
+
+.story-image {
+  border-radius: $radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-lg;
+  @include slide-up;
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+.story-content {
+  @include slide-up;
+
+  .section-heading {
+    margin-bottom: $spacing-2xl;
+  }
+}
+
+.story-text {
+  font-size: $font-size-lg;
+  line-height: 1.8;
+  color: $color-text-primary;
+  margin-bottom: $spacing-2xl;
+
+  @include respond-to('sm') {
+    font-size: $font-size-base;
+  }
+}
+
+// Timeline
+.story-timeline {
+  margin-top: $spacing-2xl;
+  padding: $spacing-2xl;
+  background-color: rgba($primary-gold, 0.05);
+  border-radius: $radius-md;
+  border-left: 3px solid $primary-gold;
+}
+
+.timeline-item {
+  display: flex;
+  gap: $spacing-lg;
+  margin-bottom: $spacing-lg;
+  position: relative;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.timeline-marker {
+  width: 12px;
+  height: 12px;
+  background-color: $primary-gold;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.timeline-content {
+  flex: 1;
+}
+
+.timeline-year {
+  font-family: $font-serif;
+  font-size: $font-size-lg;
+  color: $primary-gold;
+  margin: 0 0 $spacing-sm 0;
+  font-weight: 600;
+}
+
+.timeline-event {
+  font-size: $font-size-base;
+  color: $primary-brown;
+  margin: 0 0 $spacing-sm 0;
+  font-weight: 600;
+}
+
+.timeline-description {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin: 0;
+}
+
+// Story Event
+.story-event {
+  margin-top: $spacing-2xl;
+  padding: $spacing-lg $spacing-xl;
+  background-color: $primary-gold;
+  color: $primary-white;
+  border-radius: $radius-md;
+  text-align: center;
+}
+
+.story-event-text {
+  color: $primary-white;
+  font-size: $font-size-lg;
+  margin: 0;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}

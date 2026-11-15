@@ -1,0 +1,36 @@
+@use '../styles/variables.scss' as *;
+
+.scroll-to-top {
+  position: fixed;
+  bottom: $spacing-xl;
+  right: $spacing-xl;
+  width: 50px;
+  height: 50px;
+  background-color: $primary-gold;
+  color: $primary-white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  @include flex-center;
+  display: none;
+  z-index: $z-sticky;
+  box-shadow: $shadow-lg;
+  transition: all $transition-base;
+
+  &.visible {
+    display: flex;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: $shadow-xl;
+    background-color: darken($primary-gold, 10%);
+  }
+
+  @include respond-to('md') {
+    bottom: $spacing-lg;
+    right: $spacing-lg;
+    width: 45px;
+    height: 45px;
+  }
+}

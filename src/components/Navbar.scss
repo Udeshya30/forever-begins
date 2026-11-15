@@ -1,0 +1,124 @@
+@use '../styles/variables.scss' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: $z-sticky;
+  background-color: $primary-ivory;
+  border-bottom: 1px solid $primary-champagne;
+
+  &-container {
+    @include flex-between;
+    max-width: 1200px;
+    min-height: 76px;
+    margin: 0 auto;
+    padding: $spacing-md $spacing-lg;
+    width: 100%;
+  }
+
+  &-brand {
+    font-family: $font-serif;
+    font-size: $font-size-2xl;
+    font-weight: 600;
+    color: $primary-brown;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+
+    &:hover {
+      color: $primary-gold;
+    }
+  }
+
+  &-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    color: $primary-brown;
+  }
+
+  &-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: $spacing-xl;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-link {
+    display: inline-block;
+    font-size: $font-size-sm;
+    color: $primary-brown;
+    font-weight: 700;
+    padding: $spacing-sm 0;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: $primary-gold;
+      transition: width $transition-base;
+    }
+
+    &:hover,
+    &.active {
+      color: $primary-gold;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    &-container {
+      min-height: 68px;
+    }
+
+    &-toggle {
+      display: flex;
+    }
+
+    &-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      background-color: $primary-ivory;
+      padding: $spacing-sm $spacing-lg $spacing-lg;
+      box-shadow: $shadow-md;
+
+      &.active {
+        display: flex;
+      }
+    }
+
+    &-item + &-item {
+      border-top: 1px solid $color-border;
+    }
+
+    &-link {
+      display: block;
+      padding: $spacing-md 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+}
