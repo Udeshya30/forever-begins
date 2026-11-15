@@ -1,4 +1,5 @@
 @use 'variables.scss' as *;
+@use 'sass:color';
 
 // Google Fonts Import
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700&display=swap');
@@ -78,7 +79,7 @@ a {
   transition: color $transition-base;
 
   &:hover {
-    color: darken($primary-gold, 10%);
+    color: color.adjust($primary-gold, $lightness: -10%);
   }
 }
 
@@ -110,16 +111,11 @@ img {
     color: $primary-white;
 
     &:hover {
-      background-color: darken($primary-gold, 10%);
+      background-color: color.adjust($primary-gold, $lightness: -10%);
       color: $primary-white;
       transform: translateY(-2px);
       box-shadow: $shadow-lg;
     }
-  }
-
-:focus-visible {
-    outline: 3px solid #B49A72;
-    outline-offset: 4px;
   }
 
   &-secondary {
@@ -153,6 +149,11 @@ img {
     padding: $spacing-lg $spacing-2xl;
     font-size: $font-size-lg;
   }
+}
+
+:focus-visible {
+  outline: 3px solid #795832;
+  outline-offset: 4px;
 }
 
 // Container

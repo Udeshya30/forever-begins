@@ -25,16 +25,27 @@ const StorySection = ({ section }) => {
   const isEven = storyData.sections.indexOf(section) % 2 === 0;
 
   return (
-    <section className="story-section">
+    <section id={section.anchor || section.id} className="story-section" tabIndex={-1} aria-label={section.profileHeading || section.title}>
       <div className="container">
         <div className={`story-grid ${isEven ? 'even' : 'odd'}`}>
           <div className="story-image">
-            <img src={section.image} alt={section.title} loading="lazy" />
+            {section.image ? <figure className="story-landscape">
+              <img src={section.image} alt={section.imageAlt} loading="lazy" width="1448" height="1086" />
+              <figcaption>{section.place} · An illustrated landscape</figcaption>
+            </figure> : <div className="story-place-card">
+              <span className="story-place-label">{section.place}</span>
+              <p>{section.motif}</p>
+              <span aria-hidden="true">U & B</span>
+            </div>}
           </div>
 
           <div className="story-content">
+            {section.profileHeading && <p className="story-profile-heading">{section.profileHeading}</p>}
             <SectionHeading title={section.title} subtitle={section.subtitle} accent={false} />
             <p className="story-text">{section.content}</p>
+            {section.profileFacts && <dl className="story-profile-facts">
+              {section.profileFacts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+            </dl>}
 
             {section.timeline && <StoryTimeline section={section} />}
 
@@ -56,8 +67,7 @@ export const OurStory = () => {
       {/* Hero */}
       <HeroSection
         title="Our Story"
-        subtitle="Two hearts, one journey"
-        imageUrl="https://images.unsplash.com/photo-1519225421-9f45e0e6e3e4?w=1200&h=600&fit=crop"
+        subtitle="Waterfalls, the sea, and a meeting in Odisha"
         overlayDark={true}
       />
 

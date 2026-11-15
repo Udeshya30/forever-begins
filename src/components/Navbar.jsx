@@ -24,7 +24,8 @@ export const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-brand" onClick={closeMenu}>
-          Forever Begins
+          <span className="navbar-monogram" aria-hidden="true">U<span>&</span>B</span>
+          <span>Forever Begins<small>Udeshya & Bhanu</small></span>
         </Link>
 
         <button

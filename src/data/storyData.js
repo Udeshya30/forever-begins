@@ -1,74 +1,46 @@
-// Our Story Content Configuration
-// Update this file with your personal story
-
+import { artwork } from './assets';
+// Add personal dates and memories as they become available.
 export const storyData = {
   sections: [
     {
-      id: 'two-souls',
-      title: 'Two individuals, one journey',
-      subtitle: 'The beginning of something beautiful',
-      content: 'This section tells the story of how we came into each other\'s lives. Placeholder for personal story details.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop',
-    },
-    {
-      id: 'childhood',
-      title: 'Where it all began',
-      subtitle: 'Our childhood memories and dreams',
-      content: 'Every love story has a beginning. Ours began with...',
-      timeline: [
-        {
-          year: '2000s',
-          event: 'Placeholder: Early life',
-          description: 'Add childhood memories here',
-        },
-        {
-          year: '2010s',
-          event: 'Placeholder: Growing up',
-          description: 'Share your growing up stories',
-        },
+      id: 'his-roots', title: 'A beginning among waterfalls',
+      anchor: 'udeshya', profileHeading: 'Meet Udeshya',
+      profileFacts: [
+        { label: 'Full name', value: 'Udeshya Kumar' },
+        { label: 'Our paths crossed in', value: 'Engineering college, Odisha' },
+        { label: 'His college chapter', value: 'In his second year when Bhanu joined' },
       ],
-      image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=600&fit=crop',
+      subtitle: 'Udeshya · Ranchi, Jharkhand', place: 'His hometown',
+      content: 'Udeshya comes from Ranchi, the City of Waterfalls. Its green landscapes and cascading waters inspired one half of the world you see here.',
+      image: artwork.ranchi, imageAlt: 'Watercolor landscape inspired by Ranchi’s forested waterfalls',
     },
     {
-      id: 'our-journey',
-      title: 'Our journey together',
-      subtitle: 'From the first moment to now',
-      content: 'When we met, we didn\'t know it was the beginning of everything.',
-      timeline: [
-        {
-          year: 'Year 1',
-          event: 'Placeholder: How we met',
-          description: 'Share your first meeting story',
-        },
-        {
-          year: 'Year 2',
-          event: 'Placeholder: Growing closer',
-          description: 'Add memorable moments from your journey',
-        },
-        {
-          year: 'Year 3',
-          event: 'Placeholder: Falling in love',
-          description: 'Share special moments that define your love',
-        },
+      id: 'her-roots', title: 'A beginning beside the sea',
+      anchor: 'bhanu', profileHeading: 'Meet Bhanu',
+      profileFacts: [
+        { label: 'Full name', value: 'Bhanu Supriya' },
+        { label: 'Our paths crossed in', value: 'Engineering college, Odisha' },
+        { label: 'Her college chapter', value: 'Joined her first year when Udeshya was in second year' },
       ],
-      image: 'https://images.unsplash.com/photo-1534719526891-4a79eda9b43c?w=800&h=600&fit=crop',
+      subtitle: 'Bhanu · Visakhapatnam, Andhra Pradesh', place: 'Her hometown',
+      content: 'Bhanu comes from Visakhapatnam, the City of Destiny. Its coastline inspired the other half: open horizons, green hills, and the sea.',
+      image: artwork.vizag, imageAlt: 'Watercolor landscape inspired by Visakhapatnam’s coast and green hills',
     },
     {
-      id: 'engagement',
-      title: 'The proposal',
-      subtitle: 'A moment we\'ll never forget',
-      content: 'The day everything changed. The day he asked, and she said yes.',
-      event: 'Placeholder: Engagement date and location',
-      image: 'https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&h=600&fit=crop',
+      id: 'college', title: 'Our paths crossed in Odisha',
+      subtitle: 'An engineering college. A beginning.', place: 'Where we met', motif: 'Odisha',
+      content: 'We met at engineering college in Odisha. Udeshya was in his second year when Bhanu joined her first year. This is the place that connects our two hometowns in our story.',
+      timeline: [
+        { year: 'Second year', event: 'Udeshya', description: 'Already studying at our engineering college in Odisha.' },
+        { year: 'First year', event: 'Bhanu', description: 'Joined the same college, where our paths crossed.' },
+      ],
     },
     {
-      id: 'forever',
-      title: 'Looking forward to forever',
-      subtitle: 'Our journey continues',
-      content: 'As we step into this new chapter, we\'re grateful for every moment, every laugh, and every memory we\'ve created together. We can\'t wait to celebrate with you and begin forever.',
-      image: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&h=600&fit=crop',
+      id: 'next-chapter', title: 'A shared horizon',
+      subtitle: '12 February 2027', place: 'Our next chapter',
+      content: 'The waterfalls and the sea are a little reminder of where we come from. Odisha is where our paths crossed. Now, we are preparing to begin our next chapter, with our loved ones beside us.',
+      image: artwork.panorama, imageAlt: 'An imagined watercolor landscape joining a waterfall with the sea',
     },
   ],
 };
-
 export default storyData;

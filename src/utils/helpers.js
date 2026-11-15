@@ -1,11 +1,10 @@
 // Date and Time Utilities
-export const calculateCountdown = (targetDate, timezone = 'Asia/Kolkata') => {
-  const now = new Date();
+export const calculateCountdown = (targetDate, now = new Date()) => {
   const target = new Date(targetDate);
   
   const difference = target - now;
   
-  if (difference <= 0) {
+  if (!Number.isFinite(difference) || difference <= 0) {
     return {
       days: 0,
       hours: 0,

@@ -1,4 +1,5 @@
 @use '../styles/variables.scss' as *;
+@use 'sass:color';
 
 .surprise {
   min-height: 100vh;
@@ -231,7 +232,7 @@
 // Final Message Section
 .surprise-final {
   padding: $spacing-4xl $spacing-md;
-  background: linear-gradient(135deg, $primary-brown 0%, darken($primary-brown, 5%) 100%);
+  background: linear-gradient(135deg, $primary-brown 0%, color.adjust($primary-brown, $lightness: -5%) 100%);
   color: $primary-white;
   text-align: center;
 
@@ -298,3 +299,5 @@
     transform: scale(1);
   }
 }
+
+.surprise-video video { display: block; width: 100%; max-width: 800px; margin: auto; border-radius: $radius-md; }

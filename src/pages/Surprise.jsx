@@ -1,4 +1,5 @@
 import { Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { surpriseData } from '../data/surpriseData';
 import { HeroSection, SectionHeading } from '../components';
 import './Surprise.scss';
@@ -10,7 +11,6 @@ export const Surprise = () => {
       <HeroSection
         title={surpriseData.title}
         subtitle={surpriseData.subtitle}
-        imageUrl="https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&h=600&fit=crop"
         overlayDark={true}
       />
 
@@ -52,7 +52,7 @@ export const Surprise = () => {
       </section>
 
       {/* Memories Section */}
-      <section className="surprise-memories">
+      {surpriseData.memories.items.length > 0 && <section className="surprise-memories">
         <div className="container">
           <SectionHeading
             title={surpriseData.memories.heading}
@@ -73,10 +73,10 @@ export const Surprise = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section>}
 
       {/* Video Section */}
-      <section className="surprise-video">
+      {surpriseData.videoSection.url && <section className="surprise-video">
         <div className="container">
           <SectionHeading
             title={surpriseData.videoSection.heading}
@@ -84,12 +84,9 @@ export const Surprise = () => {
             accent={false}
           />
 
-          <div className="video-placeholder">
-            <p className="video-placeholder-text">{surpriseData.videoSection.instruction}</p>
-            <p className="video-placeholder-hint">Video URL: {surpriseData.videoSection.placeholder}</p>
-          </div>
+          <video controls preload="metadata" src={surpriseData.videoSection.url} aria-label="A personal video from Udeshya" />
         </div>
-      </section>
+      </section>}
 
       {/* Final Message */}
       <section className="surprise-final">
@@ -110,9 +107,9 @@ export const Surprise = () => {
       {/* CTA */}
       <section className="surprise-cta">
         <div className="container">
-          <a href={surpriseData.cta.href} className="btn btn-lg btn-primary">
+          <Link to={surpriseData.cta.href} className="btn btn-lg btn-primary">
             {surpriseData.cta.text}
-          </a>
+          </Link>
         </div>
       </section>
     </main>

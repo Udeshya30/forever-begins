@@ -167,3 +167,29 @@
   font-weight: 500;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
+
+.story-place-card {
+  min-height: 320px;
+  padding: clamp(2rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(145deg, $primary-champagne, $primary-blush);
+  border: 1px solid $color-border;
+  color: $primary-gold;
+  p { font-family: $font-serif; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.3; margin: $spacing-xl 0; overflow-wrap: anywhere; }
+}
+.story-place-label { font-size: $font-size-xs; text-transform: uppercase; letter-spacing: 0.16em; }
+.story-landscape { margin: 0; background: #fdfbf6; }
+.story-landscape img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.story-landscape figcaption { padding: 0.85rem 1rem; text-align: center; font-size: 0.72rem; color: $color-text-secondary; }
+.story-section { scroll-margin-top: 100px; }
+.story-profile-heading { color: $primary-gold; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+.story-profile-facts {
+  margin: 0; text-align: left; border-top: 1px solid $color-border;
+  > div { padding: 1rem 0; border-bottom: 1px solid $color-border; }
+  dt { margin-bottom: 0.3rem; color: $color-text-secondary; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  dd { margin: 0; color: $primary-brown; line-height: 1.7; }
+}

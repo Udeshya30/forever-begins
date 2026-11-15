@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useId, useState } from 'react';
+import { formatTime } from '../utils/helpers';
 import { ArrowUpRight, MapPin, Clock, Calendar, Users } from 'lucide-react';
 import { celebrationData } from '../data/celebrationData';
 import { HeroSection, SectionHeading } from '../components';
@@ -39,7 +40,7 @@ const EventCard = ({ event, index }) => {
           <Clock size={20} className="event-detail-icon" />
           <div>
             <p className="event-detail-label">Time</p>
-            <p className="event-detail-value">{event.time}</p>
+            <p className="event-detail-value">{formatTime(event.time)} IST</p>
           </div>
         </div>
 
@@ -47,7 +48,7 @@ const EventCard = ({ event, index }) => {
           <MapPin size={20} className="event-detail-icon" />
           <div>
             <p className="event-detail-label">Venue</p>
-            <p className="event-detail-value">{event.venue}</p>
+            <p className="event-detail-value">{event.venue || 'Venue to be announced'}</p>
             {event.address && <p className="event-detail-address">{event.address}</p>}
           </div>
         </div>
@@ -67,23 +68,24 @@ const EventCard = ({ event, index }) => {
         </p>
       )}
 
-      <a href={event.mapsUrl} target="_blank" rel="noopener noreferrer" className="event-map-link">
+      {event.mapsUrl ? <a href={event.mapsUrl} target="_blank" rel="noopener noreferrer" className="event-map-link">
         View on Maps <ArrowUpRight size={17} aria-hidden="true" />
-      </a>
+      </a> : <p className="event-map-pending">Directions will follow with the venue.</p>}
     </article>
   );
 };
 
 const FAQItem = ({ faq }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const answerId = useId();
 
   return (
     <div className="faq-item">
-      <button className={`faq-question ${isOpen ? 'open' : ''}`} onClick={() => setIsOpen(!isOpen)}>
+      <button className={`faq-question ${isOpen ? 'open' : ''}`} aria-expanded={isOpen} aria-controls={answerId} onClick={() => setIsOpen(!isOpen)}>
         {faq.question}
         <span className="faq-icon">{isOpen ? '−' : '+'}</span>
       </button>
-      {isOpen && <div className="faq-answer">{faq.answer}</div>}
+      <div id={answerId} className="faq-answer" hidden={!isOpen}>{faq.answer}</div>
     </div>
   );
 };
@@ -95,7 +97,6 @@ export const Celebration = () => {
       <HeroSection
         title="Our Celebration"
         subtitle="Join us for these special moments"
-        imageUrl="https://images.unsplash.com/photo-1519225421-9f45e0e6e3e4?w=1200&h=600&fit=crop"
         overlayDark={true}
       />
 
@@ -105,8 +106,10 @@ export const Celebration = () => {
           <SectionHeading
             title="Wedding Events"
             subtitle="A series of celebrations"
+            accent={false}
           />
 
+          {!celebrationData.scheduleConfirmed && <p className="schedule-note">A first look at our celebrations. Dates and times below are provisional; venues and final details will follow.</p>}
           <div className="events-grid">
             {celebrationData.events.map((event, index) => (
               <EventCard key={event.id} event={event} index={index} />
@@ -116,6 +119,14 @@ export const Celebration = () => {
       </section>
 
       {/* FAQ Section */}
+      <section className="travel-section">
+        <div className="container">
+          <SectionHeading title="Coming together" subtitle="For our family and friends travelling to celebrate" />
+          <div className="travel-grid">
+            {celebrationData.travel.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.text}</p></article>)}
+          </div>
+        </div>
+      </section>
       <section className="celebration-faq">
         <div className="container">
           <SectionHeading

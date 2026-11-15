@@ -1,142 +1,92 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { galleryData } from '../data/galleryData';
 import { HeroSection, SectionHeading } from '../components';
 import './Gallery.scss';
 
-const Lightbox = ({ image, isOpen, onClose, onNext, onPrev }) => {
-  if (!isOpen) return null;
-
-  const handleBackgroundClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
+const Lightbox = ({ image, onClose, onNext, onPrev }) => {
+  const dialogRef = useRef(null);
+  useEffect(() => {
+    const previouslyFocused = document.activeElement;
+    const dialog = dialogRef.current;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    if (!dialog.open) dialog.showModal();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
+  }, []);
 
   return (
-    <div className="lightbox-overlay" onClick={handleBackgroundClick}>
+    <dialog ref={dialogRef} className="lightbox-overlay" aria-label="Photo viewer"
+      onClose={onClose}
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowRight') { event.preventDefault(); onNext(); }
+        if (event.key === 'ArrowLeft') { event.preventDefault(); onPrev(); }
+      }}>
       <div className="lightbox-content">
-        <button className="lightbox-close" onClick={onClose} aria-label="Close lightbox">
-          <X size={32} />
-        </button>
-
-        <button className="lightbox-nav lightbox-prev" onClick={onPrev} aria-label="Previous image">
-          <ChevronLeft size={32} />
-        </button>
-
+        <button type="button" className="lightbox-close" onClick={onClose} aria-label="Close photo viewer"><X size={28} /></button>
+        <button type="button" className="lightbox-nav lightbox-prev" onClick={onPrev} aria-label="Previous photo"><ChevronLeft /></button>
         <div className="lightbox-image-wrapper">
           <img src={image.src} alt={image.alt} className="lightbox-image" />
-          {image.title && <p className="lightbox-title">{image.title}</p>}
+          <p className="lightbox-title">{image.title}</p>
+          {image.description && <p className="lightbox-caption">{image.description}</p>}
+          {image.sourceUrl && <a className="lightbox-source" href={image.sourceUrl} target="_blank" rel="noopener noreferrer">Photo source · Pexels</a>}
         </div>
-
-        <button className="lightbox-nav lightbox-next" onClick={onNext} aria-label="Next image">
-          <ChevronRight size={32} />
-        </button>
+        <button type="button" className="lightbox-nav lightbox-next" onClick={onNext} aria-label="Next photo"><ChevronRight /></button>
       </div>
-    </div>
+    </dialog>
   );
 };
 
 export const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-
-  const filteredImages =
-    selectedCategory === 'all'
-      ? galleryData.images
-      : galleryData.images.filter((img) => img.category === selectedCategory);
-
-  const selectedImage = filteredImages[selectedImageIndex];
-
-  const openLightbox = (index) => {
-    setSelectedImageIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const closeLightbox = () => {
-    setLightboxOpen(false);
-  };
-
-  const goToNextImage = () => {
-    setSelectedImageIndex((prev) => (prev + 1) % filteredImages.length);
-  };
-
-  const goToPrevImage = () => {
-    setSelectedImageIndex((prev) => (prev - 1 + filteredImages.length) % filteredImages.length);
-  };
-
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const images = selectedCategory === 'all' ? galleryData.images : galleryData.images.filter((image) => image.category === selectedCategory);
+  const closeLightbox = () => setSelectedImageIndex(null);
   return (
     <main className="gallery">
-      {/* Hero */}
-      <HeroSection
-        title="Our Gallery"
-        subtitle="Beautiful moments, captured"
-        imageUrl="https://images.unsplash.com/photo-1519225421-9f45e0e6e3e4?w=1200&h=600&fit=crop"
-        overlayDark={true}
-      />
-
-      {/* Gallery Section */}
+      <HeroSection title="Our Memories" subtitle="From college days to the next chapter" />
       <section className="gallery-section">
         <div className="container">
-          <SectionHeading title="Photo Gallery" subtitle="A collection of our favorite moments" />
-
-          {/* Category Filter */}
-          <div className="gallery-filters">
-            <button
-              className={`gallery-filter ${selectedCategory === 'all' ? 'active' : ''}`}
-              onClick={() => {
-                setSelectedCategory('all');
-                setSelectedImageIndex(0);
-              }}
-            >
-              All
-            </button>
-            {galleryData.categories.map((category) => (
-              <button
-                key={category.id}
+          <SectionHeading title="The moments we keep" subtitle="Our people, our places, our story" />
+          {galleryData.images.some((image) => image.isPlaceholder) && <p className="gallery-placeholder-note">A little inspiration for now. These sample photos will make way for our own memories.</p>}
+          <div className="gallery-filters" aria-label="Photo categories">
+            {[{ id: 'all', displayName: 'All Memories' }, ...galleryData.categories].map((category) => (
+              <button type="button" key={category.id} aria-pressed={selectedCategory === category.id}
                 className={`gallery-filter ${selectedCategory === category.id ? 'active' : ''}`}
-                onClick={() => {
-                  setSelectedCategory(category.id);
-                  setSelectedImageIndex(0);
-                }}
-              >
+                onClick={() => { setSelectedCategory(category.id); closeLightbox(); }}>
                 {category.displayName}
               </button>
             ))}
           </div>
-
-          {/* Masonry Grid */}
-          <div className="gallery-grid">
-            {filteredImages.map((image, index) => (
-              <div
-                key={image.id}
-                className="gallery-item"
-                onClick={() => openLightbox(index)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === 'Enter' && openLightbox(index)}
-              >
-                <img src={image.src} alt={image.alt} loading="lazy" />
-                <div className="gallery-overlay">
-                  <p className="gallery-overlay-text">View</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          {images.length ? (
+            <div className="gallery-grid">
+              {images.map((image, index) => (
+                <button type="button" key={image.id} className="gallery-item" onClick={() => setSelectedImageIndex(index)} aria-label={`View ${image.title || image.alt}`}>
+                  <img src={image.src} alt={image.alt} loading="lazy" />
+                  {image.isPlaceholder && <span className="gallery-placeholder-badge">Sample photo</span>}
+                  <span className="gallery-overlay"><span className="gallery-overlay-text">View memory</span></span>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="gallery-empty" role="status">
+              <span aria-hidden="true">U & B</span>
+              <h3>{selectedCategory === 'all' ? 'Our photo album is on its way' : galleryData.categories.find((category) => category.id === selectedCategory)?.displayName}</h3>
+              <p>{selectedCategory === 'college' ? 'Our shared beginning in Odisha deserves a page of its own.' : 'We’ll share our own photographs here as this album comes together.'}</p>
+            </div>
+          )}
         </div>
       </section>
-
-      {/* Lightbox */}
-      <Lightbox
-        image={selectedImage}
-        isOpen={lightboxOpen}
-        onClose={closeLightbox}
-        onNext={goToNextImage}
-        onPrev={goToPrevImage}
-      />
+      {selectedImageIndex !== null && images[selectedImageIndex] && (
+        <Lightbox image={images[selectedImageIndex]} onClose={closeLightbox}
+          onNext={() => setSelectedImageIndex((index) => (index + 1) % images.length)}
+          onPrev={() => setSelectedImageIndex((index) => (index - 1 + images.length) % images.length)} />
+      )}
     </main>
   );
 };
-
 export default Gallery;

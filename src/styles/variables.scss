@@ -1,16 +1,16 @@
 // Color Palette
 $primary-ivory: #F8F5EF;
-$primary-champagne: #E8DCC8;
+$primary-champagne: #E7E4D5;
 $primary-gold: #795832;
-$primary-brown: #493B35;
+$primary-brown: #193E36;
 $primary-blush: #EAD9D2;
 $primary-white: #FFFFFF;
 
 // Semantic Colors
 $color-background: $primary-ivory;
 $color-text-primary: $primary-brown;
-$color-text-secondary: #62534C;
-$color-text-light: #6C5B51;
+$color-text-secondary: #50635B;
+$color-text-light: #56685D;
 $color-accent: $primary-gold;
 $color-accent-light: #D4C4A8;
 $color-border: #E8DCC8;
@@ -167,5 +167,6 @@ $z-tooltip: 1070;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

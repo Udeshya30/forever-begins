@@ -1,10 +1,11 @@
 import './HeroSection.scss';
+import { artwork } from '../data/assets';
 
 export const HeroSection = ({
   title,
   subtitle,
   description,
-  imageUrl,
+  imageUrl = artwork.panorama,
   overlayDark = true,
   children,
 }) => {

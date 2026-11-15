@@ -227,3 +227,20 @@
     }
   }
 }
+
+.gallery-item { border: 0; padding: 0; }
+.gallery-item:focus-visible .gallery-overlay { opacity: 1; }
+.lightbox-overlay { margin: auto; border: 0; width: 100vw; height: 100dvh; max-width: 100vw; max-height: 100dvh; }
+.lightbox-image { max-height: 65dvh; }
+.lightbox-caption { color: $primary-white; text-align: center; margin: 0; }
+.gallery-empty {
+  max-width: 700px; margin: auto; text-align: center;
+  padding: clamp(2rem, 5vw, 4rem); border: 1px solid $color-border; background: $primary-white;
+  > span { display: block; font: italic 2.5rem $font-serif; color: $primary-gold; margin-bottom: $spacing-xl; }
+  h3 { font-size: clamp(1.5rem, 4vw, 2rem); }
+  p { margin: 0; }
+}
+.gallery-placeholder-note { max-width: 620px; margin: -1.5rem auto 2rem; text-align: center; color: $color-text-secondary; font-size: 0.85rem; }
+.gallery-placeholder-badge { position: absolute; bottom: 0.7rem; left: 0.7rem; padding: 0.3rem 0.55rem; background: #193e36; color: #fff; border-radius: 2px; font: 600 0.6rem/1.5 $font-sans; letter-spacing: 0.08em; text-transform: uppercase; pointer-events: none; }
+.lightbox-source { color: #f1d6aa; font-size: 0.8rem; text-decoration: underline; }
+.lightbox-source:hover { color: #fff; }

@@ -1,87 +1,22 @@
-// Celebration Events Configuration
-// Update this file with your wedding event details
-
+// The schedule is provisional. Confirm every event before sharing invitations.
 export const celebrationData = {
-  mainEvent: {
-    name: 'Wedding Ceremony & Reception',
-    date: '2027-02-12',
-    time: '18:00',
-    venue: 'Placeholder: Venue Name',
-    address: 'Placeholder: Venue Address, City',
-    mapsUrl: 'https://maps.google.com',
-    dressCode: 'Indian ethnic or formal attire',
-    description: 'Join us for a celebration of love and joy.',
-  },
-
+  scheduleConfirmed: false,
   events: [
-    {
-      id: 'mehendi',
-      name: 'Mehendi Ceremony',
-      date: '2027-02-10',
-      time: '18:00',
-      venue: 'Placeholder: Mehendi Venue',
-      address: 'Placeholder: Mehendi Venue Address, City',
-      mapsUrl: 'https://maps.google.com',
-      dressCode: 'Colorful ethnic wear',
-      description: 'An evening of music, dance, and mehendi. Join us as we celebrate with traditional festivities.',
-      specialInstructions: 'Come ready to dance and celebrate!',
-    },
-    {
-      id: 'sangeet',
-      name: 'Sangeet Ceremony',
-      date: '2027-02-11',
-      time: '18:00',
-      venue: 'Placeholder: Sangeet Venue',
-      address: 'Placeholder: Sangeet Venue Address, City',
-      mapsUrl: 'https://maps.google.com',
-      dressCode: 'Indian ethnic wear',
-      description: 'An elegant evening of music and performances celebrating the joy of the occasion.',
-      specialInstructions: 'Performances encouraged!',
-    },
-    {
-      id: 'wedding',
-      name: 'Wedding Ceremony & Reception',
-      date: '2027-02-12',
-      time: '18:00',
-      venue: 'Placeholder: Wedding Venue',
-      address: 'Placeholder: Wedding Venue Address, City',
-      mapsUrl: 'https://maps.google.com',
-      dressCode: 'Indian ethnic or formal attire',
-      description: 'The main celebration of our love story. Join us for the ceremony and reception.',
-      specialInstructions: 'Please arrive 15 minutes before the ceremony time.',
-    },
-    {
-      id: 'reception',
-      name: 'Post-Wedding Reception',
-      date: '2027-02-12',
-      time: '21:00',
-      venue: 'Placeholder: Reception Venue',
-      address: 'Placeholder: Reception Venue Address, City',
-      mapsUrl: 'https://maps.google.com',
-      dressCode: 'Smart casual or formal',
-      description: 'Join us for an evening of celebration, food, and dance.',
-      specialInstructions: 'Light snacks and refreshments will be served.',
-    },
+    { id: 'mehendi', name: 'Mehendi', date: '2027-02-10', time: '18:00', description: 'A gathering to begin the celebrations.', dressCode: 'To be confirmed' },
+    { id: 'sangeet', name: 'Sangeet', date: '2027-02-11', time: '18:00', description: 'An evening to celebrate together.', dressCode: 'To be confirmed' },
+    { id: 'wedding', name: 'Wedding Ceremony', date: '2027-02-12', time: '18:00', description: 'The beginning of our next chapter.', dressCode: 'To be confirmed' },
+    { id: 'reception', name: 'Reception', date: '2027-02-12', time: '21:00', description: 'A celebration with our loved ones.', dressCode: 'To be confirmed' },
+  ].map((event) => ({ ...event, venue: '', address: '', mapsUrl: '' })),
+  travel: [
+    { title: 'Getting here', text: 'Travelling from Ranchi, Visakhapatnam, or elsewhere? The wedding city, venue, and arrival guidance will be shared once confirmed.' },
+    { title: 'Staying nearby', text: 'Accommodation suggestions will follow when the venue is confirmed. Please wait for those details before booking your stay.' },
+    { title: 'A helping hand', text: 'A family contact for travel and event questions will be added here. For now, please reach out through your invitation or directly to the couple.' },
   ],
-
   faq: [
-    {
-      question: 'What is the dress code?',
-      answer: 'Please refer to each event for specific dress code. Generally, traditional Indian ethnic wear or formal attire is recommended.',
-    },
-    {
-      question: 'Can I bring a plus one?',
-      answer: 'Please check your invitation card for the number of guests you are allowed to bring.',
-    },
-    {
-      question: 'Is there parking available?',
-      answer: 'Yes, parking is available at the venue. Please follow the instructions provided at the venue entrance.',
-    },
-    {
-      question: 'Will there be vegetarian options?',
-      answer: 'Yes, both vegetarian and non-vegetarian meal options will be available.',
-    },
+    { question: 'Are the event details final?', answer: 'The schedule shown here is provisional. Confirmed timings, venues, and map links will be shared before the celebrations.' },
+    { question: 'What should I wear?', answer: 'Dress guidance for each celebration will be added once the plans are confirmed.' },
+    { question: 'Can I bring a guest?', answer: 'Please follow the guest details on your personal invitation. If you are unsure, check with the couple.' },
+    { question: 'What about meals and accessibility?', answer: 'Meal options, parking, and venue accessibility details are still being confirmed. Please let the couple know about any dietary or access needs.' },
   ],
 };
-
 export default celebrationData;

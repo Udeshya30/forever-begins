@@ -1,0 +1,82 @@
+{
+  "folders": [
+    {
+      "path": "College Days",
+      "count": 1
+    },
+    {
+      "path": "Portraits",
+      "count": 2
+    },
+    {
+      "path": "Together",
+      "count": 1
+    },
+    {
+      "path": "Wedding Celebrations",
+      "count": 1
+    },
+    {
+      "path": "With Our Families",
+      "count": 2
+    },
+    {
+      "path": "Portraits/Bhanu",
+      "count": 1
+    },
+    {
+      "path": "Portraits/Udeshya",
+      "count": 2
+    }
+  ],
+  "files": [
+    {
+      "id": "1zeIGinIqe8TLP6EVWTkXwjMGZqvLaPim",
+      "name": "sliderImage2.jpg",
+      "mime": "image/jpeg",
+      "folder": "College Days"
+    },
+    {
+      "id": "1ZPQv2K2rBWYgxQWIRUOJIotUzMBhqChI",
+      "name": "Puppy-List-Hero.png",
+      "mime": "image/png",
+      "folder": "Together"
+    },
+    {
+      "id": "1CkR7xe3YQjSo40tLaT0fd5xfWkFZ62EY",
+      "name": "sliderImage1.jpg",
+      "mime": "image/jpeg",
+      "folder": "Wedding Celebrations"
+    },
+    {
+      "id": "1dTF-m4ad2l6JYI-d4ffWuIS5eC6g_lS6",
+      "name": "20181228133059_IMG_0619.JPG",
+      "mime": "image/jpeg",
+      "folder": "With Our Families"
+    },
+    {
+      "id": "1CPUsDQ-aSF8FDV5txLG-efJ6XfcVqmHS",
+      "name": "WhatsApp Image 2024-12-25 at 6.26.41 PM (2).jpeg",
+      "mime": "image/jpeg",
+      "folder": "With Our Families"
+    },
+    {
+      "id": "15BcISQCvUyW7KNj2LehCoc9Rd9mGd2MP",
+      "name": "WhatsApp Image 2025-04-13 at 8.00.23 PM.jpeg",
+      "mime": "image/jpeg",
+      "folder": "Portraits/Bhanu"
+    },
+    {
+      "id": "1mvr9zk-Vrk2CeB2OAYooXOTktNxhsF8X",
+      "name": "1751874581771.png",
+      "mime": "image/png",
+      "folder": "Portraits/Udeshya"
+    },
+    {
+      "id": "1wygcO2Cd4Ss6ZJQWt5tZI29S2a1Rekd-",
+      "name": "profile.jpeg",
+      "mime": "image/jpeg",
+      "folder": "Portraits/Udeshya"
+    }
+  ]
+}

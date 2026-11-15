@@ -254,3 +254,14 @@
   line-height: 1.8;
   animation: slideUp 0.3s ease-out;
 }
+
+.schedule-note { max-width: 720px; margin: 0 auto $spacing-2xl; padding: $spacing-lg; border: 1px solid $color-border; text-align: center; }
+.event-map-pending { margin-top: auto; color: $color-text-secondary; font-size: $font-size-sm; }
+.travel-section { background: $primary-champagne; }
+.travel-grid {
+  display: grid; gap: $spacing-xl;
+  @include respond-to('lg') { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  article { padding: $spacing-xl; border: 1px solid rgba($primary-gold, 0.25); }
+  h3 { font-size: $font-size-2xl; }
+  p { margin: 0; }
+}

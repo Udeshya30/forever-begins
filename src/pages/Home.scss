@@ -1,178 +1,87 @@
 @use '../styles/variables.scss' as *;
 
-.home {
-  min-height: 100vh;
+.home { min-height: 100vh; }
+.eyebrow { font: 700 0.7rem/1.7 $font-sans; text-transform: uppercase; letter-spacing: 0.19em; color: $primary-gold; }
+.home h2 { font-size: clamp(2.3rem, 4.5vw, 4rem); font-weight: 400; line-height: 1.15; }
+.home h2 em { font-weight: 400; }
+.landscape-hero {
+  position: relative; isolation: isolate; min-height: 860px;
+  min-height: max(860px, calc(100svh - 76px)); padding: 4.5rem 1rem 7rem;
+  display: flex; justify-content: center; align-items: flex-start; overflow: hidden; text-align: center;
+  background: #f5e8cf;
 }
-
-// Hero Names
-.hero-names {
-  animation: slideUp 0.8s ease-out;
+.landscape-hero-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center bottom; z-index: -3; }
+.landscape-hero-wash { position: absolute; inset: 0; z-index: -2; background: linear-gradient(180deg, rgba(248,245,239,0.97), rgba(248,245,239,0.88) 29%, rgba(248,245,239,0.08) 67%, rgba(15,48,41,0.35)); }
+.landscape-hero-copy { max-width: 1000px; animation: slideUp 0.8s ease-out; }
+.landscape-hero-copy .eyebrow { margin-bottom: 1.1rem; }
+.landscape-hero h1 { font-size: clamp(3.5rem, 8vw, 7.3rem); font-weight: 400; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.045em; }
+.landscape-hero h1 > span { font-style: italic; font-size: 0.73em; color: $primary-gold; }
+.landscape-hero-tagline { font: italic clamp(1.5rem, 3vw, 2.6rem)/1.3 $font-serif; margin-bottom: 1.2rem; }
+.landscape-hero-intro { font-size: 0.95rem; line-height: 1.8; }
+.landscape-hero-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.7rem; margin-top: 1.8rem; }
+.home .btn { gap: 0.75rem; font-size: 0.7rem; letter-spacing: 0.1em; padding: 1.05rem 1.5rem; border-radius: 0; }
+.landscape-hero .btn-primary { background: $primary-brown; }
+.hero-story-link { display: inline-flex; gap: 0.6rem; align-items: center; color: $primary-brown; font-size: 0.85rem; border-bottom: 1px solid; padding: 0.55rem 0; }
+.landscape-hero-date {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); min-width: 260px;
+  display: flex; flex-direction: column; gap: 0.4rem; color: #fff7e6; text-shadow: 0 1px 5px #153b32;
+  > span:first-child { font: 1.4rem $font-serif; }
+  > span:last-child { display: flex; align-items: center; justify-content: center; gap: 0.6rem; font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; }
+  &:hover { color: #fff7e6; }
 }
-
-.hero-names-label {
-  color: $primary-white;
-  font-size: $font-size-sm;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: $spacing-md;
+.worlds-section { padding: clamp(4rem, 8vw, 7rem) 1rem; text-align: center; scroll-margin-top: 90px; }
+.worlds-intro { max-width: 650px; margin: 1.6rem auto 3rem; color: $color-text-secondary; }
+.worlds-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.5rem; max-width: 1040px; margin: auto; }
+.hometown-card { text-align: left; border: 1px solid $color-border; background: #fdfbf6; }
+.hometown-art { position: relative; overflow: hidden; }
+.hometown-art img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform 600ms ease; }
+.hometown-card:hover img { transform: scale(1.035); }
+.hometown-art > span { position: absolute; bottom: 1rem; left: 1rem; color: #fff7e6; background: #193e36; padding: 0.45rem 0.8rem; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.hometown-copy { padding: clamp(1.4rem, 3vw, 2.2rem); }
+.hometown-copy .eyebrow { margin-bottom: 0.7rem; }
+.hometown-copy h3 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 400; overflow-wrap: anywhere; margin-bottom: 0.7rem; }
+.hometown-copy > p:not(.eyebrow) { color: $color-text-secondary; font-size: 0.9rem; }
+.hometown-card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-top: 1.1rem; margin-top: 1.5rem; border-top: 1px solid $color-border; }
+.hometown-signature { font: italic 1.15rem $font-serif; }
+.hometown-profile-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-left: auto; min-height: 44px; color: $primary-gold; font-size: 0.75rem; font-weight: 700; }
+.hometown-profile-arrow { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid $primary-gold; border-radius: 50%; transition: background-color $transition-base, color $transition-base; }
+.hometown-profile-link:hover .hometown-profile-arrow, .hometown-profile-link:focus-visible .hometown-profile-arrow { background: $primary-gold; color: $primary-white; }
+.worlds-connection { display: flex; align-items: center; justify-content: center; gap: 1rem; color: $primary-gold; > span { height: 1px; width: 35px; background: $color-border; } }
+.artwork-note { font-size: 0.72rem; color: $color-text-secondary; margin-top: 1.5rem; }
+.odisha-chapter { background: $primary-brown; color: $primary-ivory; padding: clamp(3.5rem, 7vw, 6rem) 1rem; }
+.odisha-chapter-grid { display: grid; gap: 1rem; align-items: center; }
+.odisha-chapter .eyebrow { color: #e3c69b; }
+.odisha-chapter-copy { max-width: 490px; p { color: #e6e6d9; } a { display: inline-flex; gap: 0.6rem; align-items: center; color: #f1d6aa; padding: 0.5rem 0; border-bottom: 1px solid #a58c60; font-size: 0.9rem; } }
+.journey-thread { list-style: none; padding-top: 2.5rem; margin-top: 2.5rem; display: grid; grid-template-columns: 1fr; gap: 1.8rem; border-top: 1px solid #6d8678; }
+.journey-thread li { display: flex; flex-direction: column; gap: 0.35rem; }
+.journey-thread span { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: #d6c8ab; }
+.journey-thread strong { display: flex; gap: 0.7rem; align-items: center; font: 400 clamp(1.1rem, 2.5vw, 1.5rem) $font-serif; }
+.home-countdown { padding: clamp(4rem, 7vw, 6rem) 1rem; background: #eee9db; text-align: center; }
+.countdown-date { color: $color-text-secondary; font-size: 0.95rem; margin-top: 1.5rem; }
+.home-invitation { padding: clamp(4rem, 7vw, 6rem) 1rem; }
+.invitation-content { display: grid; gap: 2.5rem; align-items: center; }
+.invitation-art { overflow: hidden; border-radius: 50% 50% 0 0; border: 1px solid $color-border; }
+.invitation-art img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.invitation-text .section-heading { margin-bottom: 1.3rem; text-align: left; }
+.invitation-text .section-heading-accent { display: none; }
+.invitation-text > p:not(.eyebrow) { color: $color-text-secondary; margin-bottom: 1.8rem; }
+.home-cta { padding: clamp(4rem, 7vw, 6rem) 1rem; text-align: center; background: #e3ece7; }
+.home-cta > .container > p:not(.eyebrow) { color: $color-text-secondary; }
+.cta-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }
+@include respond-to('md') {
+  .worlds-grid { grid-template-columns: minmax(0, 1fr) 55px minmax(0, 1fr); gap: 0.7rem; align-items: start; }
+  .hometown-card-coast { margin-top: 4rem; }
+  .worlds-connection { height: 100%; flex-direction: column; > span { width: 1px; height: 60px; } }
+  .odisha-chapter-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .journey-thread { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .invitation-content { grid-template-columns: 1fr 1fr; gap: 4rem; }
 }
-
-.hero-names-text {
-  font-family: $font-serif;
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 500;
-  margin: 0;
-  line-height: 1.2;
-
-}
-
-.hero-names-and {
-  display: inline;
-  font-weight: 300;
-  font-size: 0.7em;
-  margin: 0 $spacing-sm;
-}
-
-// Countdown Section
-.home-countdown {
-  padding: $spacing-4xl $spacing-md;
-  background-color: $primary-champagne;
-  border-top: 1px solid $primary-champagne;
-  border-bottom: 1px solid $primary-champagne;
-
-  @include respond-to('md') {
-    padding: $spacing-4xl $spacing-xl;
-  }
-}
-
-.countdown-wrapper {
-  text-align: center;
-}
-
-.countdown-heading {
-  font-size: $font-size-3xl;
-  color: $primary-brown;
-  margin-bottom: $spacing-2xl;
-
-  @include respond-to('sm') {
-    font-size: $font-size-2xl;
-  }
-}
-
-.countdown-date {
-  margin-top: $spacing-2xl;
-  font-size: $font-size-lg;
-  color: $color-text-secondary;
-  letter-spacing: 0.02em;
-}
-
-// Invitation Section
-.home-invitation {
-  padding: $spacing-4xl $spacing-md;
-  background-color: $primary-ivory;
-
-  @include respond-to('md') {
-    padding: $spacing-4xl $spacing-xl;
-  }
-}
-
-.invitation-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: $spacing-3xl;
-  align-items: center;
-
-  @include respond-to('lg') {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.invitation-text {
-  order: 2;
-
-  @include respond-to('lg') {
-    order: 1;
-  }
-}
-
-.invitation-message {
-  font-size: $font-size-lg;
-  color: $color-text-primary;
-  margin-bottom: $spacing-lg;
-  line-height: 1.8;
-
-  @include respond-to('sm') {
-    font-size: $font-size-base;
-  }
-}
-
-.invitation-subtext {
-  font-size: $font-size-base;
-  color: $color-text-secondary;
-  line-height: 1.8;
-}
-
-.invitation-image {
-  order: 1;
-  border-radius: 45% 45% $radius-sm $radius-sm;
-  overflow: hidden;
-  box-shadow: $shadow-lg;
-  @include slide-up;
-
-  @include respond-to('lg') {
-    order: 2;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-}
-
-// CTA Section
-.home-cta {
-  padding: $spacing-4xl $spacing-md;
-  background-color: $primary-brown;
-  color: $primary-white;
-  text-align: center;
-
-  @include respond-to('md') {
-    padding: $spacing-4xl $spacing-xl;
-  }
-
-  h2 {
-    color: $primary-white;
-    margin-bottom: $spacing-md;
-  }
-
-  p {
-    color: rgba($primary-white, 0.9);
-    font-size: $font-size-lg;
-    margin-bottom: $spacing-2xl;
-  }
-}
-
-.cta-content {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: $spacing-lg;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  .btn-secondary {
-    background-color: $primary-white;
-    color: $primary-brown;
-    border-color: $primary-white;
-
-    &:hover {
-      background-color: $primary-champagne;
-      color: $primary-brown;
-    }
-  }
+@media (max-width: 575px) {
+  .landscape-hero { min-height: 800px; padding-top: 3.2rem; }
+  .landscape-hero h1 { max-width: 340px; margin-inline: auto; }
+  .landscape-hero h1 > span { display: block; font-size: 0.5em; margin: 0.25rem 0; }
+  .landscape-hero-copy .eyebrow { max-width: 250px; margin-inline: auto; }
+  .landscape-hero-wash { background: linear-gradient(180deg, rgba(248,245,239,0.98), rgba(248,245,239,0.90) 48%, rgba(248,245,239,0.06) 78%, rgba(15,48,41,0.45)); }
+  .landscape-hero-actions { gap: 0.9rem; flex-direction: column; margin-top: 1rem; }
+  .landscape-hero-art { object-position: 48% bottom; }
 }
