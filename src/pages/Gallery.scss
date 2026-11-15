@@ -244,3 +244,14 @@
 .gallery-placeholder-badge { position: absolute; bottom: 0.7rem; left: 0.7rem; padding: 0.3rem 0.55rem; background: #193e36; color: #fff; border-radius: 2px; font: 600 0.6rem/1.5 $font-sans; letter-spacing: 0.08em; text-transform: uppercase; pointer-events: none; }
 .lightbox-source { color: #f1d6aa; font-size: 0.8rem; text-decoration: underline; }
 .lightbox-source:hover { color: #fff; }
+// Keep the complete imported photographs visible, including family groups.
+.gallery-grid { display: block; column-count: 1; column-gap: $spacing-lg; }
+.gallery-item { display: block; width: 100%; aspect-ratio: auto; margin-bottom: $spacing-lg; break-inside: avoid; background: $primary-champagne; }
+.gallery-item img { width: 100%; height: auto; }
+.gallery-item:hover img { transform: none; }
+@include respond-to('sm') { .gallery-grid { column-count: 2; } }
+@include respond-to('lg') { .gallery-grid { column-count: 3; } }
+.gallery-status { text-align: center; padding: 2rem 1rem; color: $color-text-secondary; }
+.photo-unavailable { display: grid; place-items: center; min-height: 160px; padding: 1.5rem; background: #eee9df; color: #50635b; font-size: 0.85rem; text-align: center; }
+.lightbox-content .photo-unavailable { min-width: 240px; }
+.gallery-share-invite { text-align: center; margin: -1rem 0 2.5rem; p { color: $color-text-secondary; font-size: 0.9rem; } .btn { padding: 0.7rem 1rem; font-size: 0.75rem; } }

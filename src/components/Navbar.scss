@@ -49,14 +49,14 @@
     display: flex;
     align-items: center;
     list-style: none;
-    gap: $spacing-xl;
+    gap: 1.1rem;
     margin: 0;
     padding: 0;
   }
 
   &-link {
     display: inline-block;
-    font-size: $font-size-sm;
+    font-size: 0.75rem;
     color: $primary-brown;
     font-weight: 700;
     padding: $spacing-sm 0;

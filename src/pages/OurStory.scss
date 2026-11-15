@@ -193,3 +193,15 @@
   dt { margin-bottom: 0.3rem; color: $color-text-secondary; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
   dd { margin: 0; color: $primary-brown; line-height: 1.7; }
 }
+.story-image-portrait {
+  width: 100%;
+  max-width: 420px;
+  justify-self: center;
+}
+
+.story-portrait img {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  aspect-ratio: auto;
+}

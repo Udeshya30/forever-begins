@@ -1,6 +1,8 @@
 import { storyData } from '../data/storyData';
 import { SectionHeading, HeroSection } from '../components';
 import './OurStory.scss';
+import { useDriveGallery } from '../hooks/useDriveGallery';
+import { Photo } from '../components/Photo';
 
 const StoryTimeline = ({ section }) => {
   if (!section.timeline) return null;
@@ -21,17 +23,19 @@ const StoryTimeline = ({ section }) => {
   );
 };
 
-const StorySection = ({ section }) => {
+const StorySection = ({ section, portraits }) => {
   const isEven = storyData.sections.indexOf(section) % 2 === 0;
+  const portrait = portraits[section.anchor];
+  const fullName = section.profileFacts?.find((fact) => fact.label === 'Full name')?.value;
 
   return (
     <section id={section.anchor || section.id} className="story-section" tabIndex={-1} aria-label={section.profileHeading || section.title}>
       <div className="container">
         <div className={`story-grid ${isEven ? 'even' : 'odd'}`}>
-          <div className="story-image">
-            {section.image ? <figure className="story-landscape">
-              <img src={section.image} alt={section.imageAlt} loading="lazy" width="1448" height="1086" />
-              <figcaption>{section.place} · An illustrated landscape</figcaption>
+          <div className={`story-image ${portrait ? 'story-image-portrait' : ''}`}>
+            {section.image ? <figure className={`story-landscape ${portrait ? 'story-portrait' : ''}`}>
+              <Photo key={portrait?.src || section.image} src={portrait?.src || section.image} alt={portrait ? fullName : section.imageAlt} loading="lazy" width={portrait?.width} height={portrait?.height} />
+              <figcaption>{portrait ? fullName : `${section.place} · An illustrated landscape`}</figcaption>
             </figure> : <div className="story-place-card">
               <span className="story-place-label">{section.place}</span>
               <p>{section.motif}</p>
@@ -62,6 +66,7 @@ const StorySection = ({ section }) => {
 };
 
 export const OurStory = () => {
+  const { portraits } = useDriveGallery();
   return (
     <main className="our-story">
       {/* Hero */}
@@ -74,7 +79,7 @@ export const OurStory = () => {
       {/* Story Sections */}
       <div className="story-content-wrapper">
         {storyData.sections.map((section) => (
-          <StorySection key={section.id} section={section} />
+          <StorySection key={section.id} section={section} portraits={portraits} />
         ))}
       </div>
     </main>

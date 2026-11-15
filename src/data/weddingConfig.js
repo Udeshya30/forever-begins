@@ -45,6 +45,7 @@ export const weddingConfig = {
     { label: 'Our Story', path: '/our-story' },
     { label: 'Celebration', path: '/celebration' },
     { label: 'Gallery', path: '/gallery' },
+    { label: 'Share Photos', path: '/share-photos' },
     { label: 'Surprise', path: '/surprise' },
   ],
 };

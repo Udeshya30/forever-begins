@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Temporary photo-import metadata and originals
+/tmp/drive-import/
+/tmp/drive-setup/
+
+# Server-only credentials
+.env
+.env.*
+!.env.example
