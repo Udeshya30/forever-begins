@@ -67,11 +67,12 @@ test('foreign origins and malformed bodies cannot write files', async () => {
 });
 
 test('Apps Script saves only into Misc, records the message, and deduplicates a retry after manual review', () => {
-  const properties = new Map([['UPLOAD_SECRET', setup.secret]]);
+  const properties = new Map([['UPLOAD_SECRET', setup.secret], ['WEDDING_PARENT_ID', 'parent_folder_identifier'], ['MISC_FOLDER_ID', 'misc_folder_identifier']]);
   const saved = [];
   const iterator = (items) => { let index = 0; return { hasNext: () => index < items.length, next: () => items[index++] }; };
   const misc = {
     getName: () => 'Misc', getFilesByName: () => iterator([]),
+    getParents: () => iterator([{ getId: () => 'parent_folder_identifier' }]),
     createFile(blob) { const file = { getId: () => 'received_photo_id', setDescription(text) { file.description = text; } }; saved.push({ blob, file }); return file; },
   };
   const context = {
@@ -81,7 +82,7 @@ test('Apps Script saves only into Misc, records the message, and deduplicates a 
       setProperty: (key, value) => properties.set(key, value),
       getProperties: () => Object.fromEntries(properties), deleteProperty: (key) => properties.delete(key),
     }) },
-    DriveApp: { getFolderById: () => ({ getFolders: () => iterator([misc]) }) },
+    DriveApp: { getFolderById: (id) => { assert.equal(id, 'misc_folder_identifier'); return misc; } },
     LockService: { getScriptLock: () => ({ waitLock() {}, hasLock: () => true, releaseLock() {} }) },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: (text) => ({ setMimeType: () => JSON.parse(text) }) },
     Utilities: { base64Decode: (data) => [...Buffer.from(data, 'base64')], newBlob: (bytes, type, name) => ({ bytes, type, name }), formatDate: () => '2026-11-16' },
@@ -100,7 +101,7 @@ test('Apps Script saves only into Misc, records the message, and deduplicates a 
   const nextPhoto = { ...payload, uploadId: 'abcdef12-1234-1234-1234-123456789abc', secret: setup.secret };
   assert.equal(context.doPost({ postData: { contents: JSON.stringify(nextPhoto) } }).ok, false);
   assert.equal(saved.length, 1);
-  context.DriveApp.getFolderById = () => ({ getFolders: () => iterator([]) });
+  context.DriveApp.getFolderById = () => ({ getParents: () => iterator([]) });
   assert.equal(context.doPost({ postData: { contents: JSON.stringify(nextPhoto) } }).ok, false);
   assert.equal(saved.length, 1);
 });

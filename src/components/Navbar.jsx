@@ -39,7 +39,7 @@ export const Navbar = () => {
         </button>
 
         <ul id="primary-navigation" className={`navbar-menu ${isOpen ? 'active' : ''}`}>
-          {weddingConfig.navigation.map((item) => (
+          {weddingConfig.navigation.filter((item) => item.path !== '/share-photos').map((item) => (
             <li key={item.path} className="navbar-item">
               <Link
                 to={item.path}

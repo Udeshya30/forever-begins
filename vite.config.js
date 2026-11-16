@@ -15,7 +15,11 @@ export default defineConfig(({ mode }) => {
         }).catch(next)
       }
       if (req.url?.split('?')[0] !== '/api/gallery') return next()
-      galleryHandler(req, res, { apiKey: env.GOOGLE_DRIVE_API_KEY || process.env.GOOGLE_DRIVE_API_KEY || '' }).catch(next)
+      galleryHandler(req, res, {
+        apiKey: env.GOOGLE_DRIVE_API_KEY || process.env.GOOGLE_DRIVE_API_KEY || '',
+        folderUrl: env.GOOGLE_DRIVE_FOLDER_URL || process.env.GOOGLE_DRIVE_FOLDER_URL || '',
+        miscFolderUrl: env.GOOGLE_DRIVE_MISC_FOLDER_URL || process.env.GOOGLE_DRIVE_MISC_FOLDER_URL || '',
+      }).catch(next)
     })
   }
   return {

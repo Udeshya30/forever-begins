@@ -1,6 +1,6 @@
 # Live Google Drive photo albums
 
-The website reads the shared parent folder configured in src/data/driveConfig.js at runtime. No personal photo copies are stored in public/ or included in the build. A small server endpoint lists files and streams Google-generated image previews to the browser. Normal browser/CDN caches may temporarily cache those responses; they are not saved as project files.
+The website reads GOOGLE_DRIVE_FOLDER_URL and GOOGLE_DRIVE_MISC_FOLDER_URL from the server environment at runtime. Both are populated in your local .env. They accept shared folder URLs or raw IDs. Album labels remain in src/data/driveConfig.js; personal folder IDs are not hardcoded there. No personal photo copies are stored in public/ or included in the build. A small server endpoint lists files and streams Google-generated image previews to the browser. Normal browser/CDN caches may temporarily cache those responses; they are not saved as project files.
 
 ## Folder structure
 
@@ -34,6 +34,7 @@ File names determine gallery ordering (prefix 01, 02, etc. to control the order)
 - npm run dev: Vite middleware serves /api/gallery locally.
 - npm run preview: the same endpoint works with the production preview.
 - Vercel: api/gallery.js runs as a Node function. The SPA rewrite excludes /api/.
+- Set GOOGLE_DRIVE_FOLDER_URL and GOOGLE_DRIVE_MISC_FOLDER_URL in Vercel's server environment as well as your local .env. Do not prefix them with VITE_.
 - Static-only hosts without functions cannot run this live endpoint.
 - Restart an already-running dev server if it has not picked up the changed Vite configuration.
 

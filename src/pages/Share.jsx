@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Camera, Check, Heart, ImagePlus, Upload, X } from 'lucide-react';
 import { preparePhoto } from '../utils/preparePhoto';
+import { sendPhoto } from '../utils/sendPhoto';
 import { MAX_ORIGINAL_BYTES, MAX_PHOTOS_PER_BATCH } from '../utils/uploadLimits';
 import './Share.scss';
 
@@ -46,7 +47,7 @@ export const Share = () => {
       const id = crypto.randomUUID();
       const preview = URL.createObjectURL(file);
       objectUrls.current.set(id, preview);
-      additions.push({ id, fingerprint, file, preview, status: 'ready', error: '' });
+      additions.push({ id, fingerprint, file, preview, status: 'ready', progress: 0, error: '' });
     }
     setQueue((previous) => [...previous, ...additions]);
   };
@@ -69,20 +70,14 @@ export const Share = () => {
     try {
       for (const item of queue.filter((photo) => photo.status !== 'sent')) {
         try {
-          updatePhoto(item.id, { status: 'preparing', error: '' });
+          updatePhoto(item.id, { status: 'preparing', progress: 0, error: '' });
           const photo = await preparePhoto(item.file);
           updatePhoto(item.id, { status: 'sending' });
-          let response;
-          try {
-            response = await fetch('/api/upload', {
-              method: 'POST', headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ ...photo, uploadId: item.id, guestName, note }),
-              signal: AbortSignal.timeout(60000),
-            });
-          } catch { throw new Error('We couldn’t confirm receipt. Please retry this photo.'); }
-          const result = await response.json().catch(() => ({}));
-          if (!response.ok || result.ok !== true) throw new Error(result.error || 'This photo couldn’t be sent. Please retry.');
-          updatePhoto(item.id, { status: 'sent' });
+          await sendPhoto({ ...photo, uploadId: item.id, guestName, note }, {
+            onProgress: (progress) => updatePhoto(item.id, { progress }),
+            onTransferred: () => updatePhoto(item.id, { status: 'saving' }),
+          });
+          updatePhoto(item.id, { status: 'sent', progress: 100 });
         } catch (error) { updatePhoto(item.id, { status: 'error', error: error.message }); }
       }
     } finally { setBusy(false); }
@@ -105,6 +100,7 @@ export const Share = () => {
             <fieldset disabled={busy}>
               <label className="share-field">Your name <span>(optional)</span><input autoComplete="name" maxLength={80} value={guestName} onChange={(event) => setGuestName(event.target.value)} placeholder="So we know who to thank" /></label>
               <label className="share-field">A little note <span>(optional)</span><textarea maxLength={500} rows={3} value={note} onChange={(event) => setNote(event.target.value)} placeholder="Anything you’d like to tell us about these photos?" /></label>
+              <p className="share-details-hint">Your name and note will accompany the photos for us to read.</p>
               <div className={`share-dropzone ${busy ? 'is-busy' : ''}`} onDragOver={(event) => event.preventDefault()} onDrop={(event) => { event.preventDefault(); addPhotos(Array.from(event.dataTransfer.files)); }}>
                 <ImagePlus size={32} strokeWidth={1.2} aria-hidden="true" />
                 <label htmlFor="guest-photos" className="share-picker">Choose your photos<input id="guest-photos" className="share-file-input" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={(event) => { addPhotos(Array.from(event.target.files)); event.target.value = ''; }} /></label>
@@ -114,10 +110,19 @@ export const Share = () => {
               {queue.length > 0 && <ul className="share-photo-list" aria-label="Selected photos">
                 {queue.map((item) => <li key={item.id}>
                   <img src={item.preview} alt="Selected photo preview" width="64" height="64" />
-                  <div><span className="share-photo-name">{item.file.name}</span><span className={`share-photo-status status-${item.status}`}>{({ ready: 'Ready to share', preparing: 'Preparing photo…', sending: 'Sending…', sent: 'Received with thanks', error: item.error })[item.status]}</span></div>
+                  <div>
+                    <span className="share-photo-name">{item.file.name}</span>
+                    <div className="share-progress-label">
+                      <span className={`share-photo-status status-${item.status}`}>{({ ready: 'Ready to share', preparing: 'Preparing photo…', sending: 'Sending photo…', saving: 'Saving photo…', sent: 'Received with thanks', error: item.error })[item.status]}</span>
+                      {item.status === 'sending' && <span className="share-progress-percent">{item.progress}% sent</span>}
+                      {item.status === 'sent' && <span className="share-progress-percent">100%</span>}
+                    </div>
+                    {item.status !== 'ready' && <progress className={`share-photo-progress progress-${item.status}`} max="100" value={item.status === 'preparing' ? undefined : item.progress} aria-label={`Photo transfer progress for ${item.file.name}`} />}
+                  </div>
                   {item.status === 'sent' ? <Check size={20} aria-label="Sent" /> : <button type="button" onClick={() => removePhoto(item.id)} aria-label={`Remove ${item.file.name} from selection`}><X size={18} /></button>}
                 </li>)}
               </ul>}
+              {busy && <p className="share-batch-progress" role="status">{sentCount} of {queue.length} photos received. Please keep this page open until sharing finishes.</p>}
               <button className="btn btn-primary share-submit" type="submit" disabled={busy || connection !== 'ready' || !pendingCount}><Upload size={17} aria-hidden="true" />{busy ? 'Sharing your memories…' : queue.some((item) => item.status === 'error') ? 'Retry remaining photos' : 'Send our way'}</button>
             </fieldset>
             <div className="share-result" aria-live="polite" aria-atomic="true">

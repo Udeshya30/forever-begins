@@ -8,6 +8,7 @@
     "build": "vite build",
     "lint": "oxlint",
     "test": "node --test",
+    "prepare:drive-upload": "node scripts/prepare-drive-upload.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,7 +1,6 @@
 // Deploy this as an Apps Script web app executing as the Drive folder owner.
 // Configure UPLOAD_SECRET (32+ characters) in Project Settings > Script properties.
 // This script only writes to the existing Misc child of the wedding folder.
-var WEDDING_PARENT_ID = '166bE-gQw9sxQRa_2Hab8dAihj48RO6t_';
 var MAX_UPLOAD_BYTES = 3 * 1024 * 1024;
 var MAX_UPLOADS_PER_DAY = 300;
 
@@ -10,17 +9,16 @@ function uploadJson_(data) {
 }
 
 function miscFolder_() {
-  var children = DriveApp.getFolderById(WEDDING_PARENT_ID).getFolders();
-  var match = null;
-  while (children.hasNext()) {
-    var folder = children.next();
-    if (folder.getName().trim().toLowerCase() === 'misc') {
-      if (match) throw new Error('More than one Misc folder exists.');
-      match = folder;
-    }
+  var properties = PropertiesService.getScriptProperties();
+  var parentId = properties.getProperty('WEDDING_PARENT_ID');
+  var miscId = properties.getProperty('MISC_FOLDER_ID');
+  if (!parentId || !miscId) throw new Error('Configure the wedding parent and Misc folder IDs in Script properties.');
+  var folder = DriveApp.getFolderById(miscId);
+  var parents = folder.getParents();
+  while (parents.hasNext()) {
+    if (parents.next().getId() === parentId) return folder;
   }
-  if (!match) throw new Error('Create one Misc folder inside the wedding parent folder.');
-  return match;
+  throw new Error('The upload destination must remain inside the wedding parent folder.');
 }
 
 function checkSetup() {

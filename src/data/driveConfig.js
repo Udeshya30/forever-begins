@@ -1,5 +1,3 @@
-export const driveFolderId = '166bE-gQw9sxQRa_2Hab8dAihj48RO6t_';
-
 export const driveAlbums = [
   { id: 'college', folderName: 'College Days', displayName: 'College Days' },
   { id: 'together', folderName: 'Together', displayName: 'Together' },

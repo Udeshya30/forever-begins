@@ -1,8 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createDriveService, parsePublicFolder } from '../server/drive.js';
+import { resolveDriveFolderId } from '../server/driveConfig.js';
 
 const folderMime = 'application/vnd.google-apps.folder';
+test('folder settings accept shared Drive URLs or IDs and reject unrelated URLs', () => {
+  assert.equal(resolveDriveFolderId('root_identifier'), 'root_identifier');
+  assert.equal(resolveDriveFolderId('https://drive.google.com/drive/folders/root_identifier?usp=sharing'), 'root_identifier');
+  assert.equal(resolveDriveFolderId('https://drive.google.com/drive/u/0/folders/root_identifier'), 'root_identifier');
+  assert.equal(resolveDriveFolderId('https://other.example/drive/folders/root_identifier'), '');
+  assert.equal(resolveDriveFolderId('http://drive.google.com/drive/folders/root_identifier'), '');
+  assert.equal(resolveDriveFolderId(''), '');
+});
 const folder = (id, name) => ({ id, name, mimeType: folderMime });
 const photo = (id, name, modifiedTime = '2026-11-16T00:00:00Z') => ({ id, name, mimeType: 'image/jpeg', modifiedTime });
 const encodeFolder = (entries) => {

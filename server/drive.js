@@ -1,4 +1,5 @@
-import { driveAlbums, driveFolderId } from '../src/data/driveConfig.js';
+import { driveAlbums } from '../src/data/driveConfig.js';
+import { resolveDriveFolderId } from './driveConfig.js';
 
 const folderType = 'application/vnd.google-apps.folder';
 export const validDriveId = (id) => typeof id === 'string' && /^[\w-]{10,200}$/.test(id);
@@ -20,7 +21,9 @@ export function parsePublicFolder(html) {
   return entries;
 }
 
-export function createDriveService({ fetchImpl = fetch, now = Date.now, apiKey = '', folderId = driveFolderId } = {}) {
+export function createDriveService({ fetchImpl = fetch, now = Date.now, apiKey = '', folderId = process.env.GOOGLE_DRIVE_FOLDER_URL || '', miscFolderId = process.env.GOOGLE_DRIVE_MISC_FOLDER_URL || '' } = {}) {
+  folderId = resolveDriveFolderId(folderId);
+  miscFolderId = resolveDriveFolderId(miscFolderId);
   let cached = null;
   let expiresAt = 0;
   let pending = null;
@@ -52,6 +55,7 @@ export function createDriveService({ fetchImpl = fetch, now = Date.now, apiKey =
   }
 
   async function walk(id, seen = new Set(), depth = 0) {
+    if (id === miscFolderId) return [];
     if (seen.has(id)) return [];
     if (depth > 5 || seen.size >= 100) throw new Error('DRIVE_FOLDER_LIMIT');
     seen.add(id);
@@ -76,7 +80,7 @@ export function createDriveService({ fetchImpl = fetch, now = Date.now, apiKey =
   }
 
   async function load() {
-    const root = await listFolder(folderId);
+    const root = (await listFolder(folderId)).filter((file) => file.id !== miscFolderId);
     const matchFolder = (name, entries = root) => entries.find((file) => file.mimeType === folderType && file.name.toLowerCase().trim() === name.toLowerCase());
     const albums = await Promise.all(driveAlbums.map(async (album) => {
       const folder = matchFolder(album.folderName);

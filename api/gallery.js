@@ -12,9 +12,12 @@ export default async function galleryHandler(req, res, options = {}) {
     return res.end();
   }
   const apiKey = options.apiKey ?? process.env.GOOGLE_DRIVE_API_KEY ?? '';
-  if (!service || apiKey !== serviceKey) {
-    service = createDriveService({ apiKey });
-    serviceKey = apiKey;
+  const folderId = options.folderUrl ?? process.env.GOOGLE_DRIVE_FOLDER_URL ?? '';
+  const miscFolderId = options.miscFolderUrl ?? process.env.GOOGLE_DRIVE_MISC_FOLDER_URL ?? '';
+  const configKey = JSON.stringify([apiKey, folderId, miscFolderId]);
+  if (!service || configKey !== serviceKey) {
+    service = createDriveService({ apiKey, folderId, miscFolderId });
+    serviceKey = configKey;
   }
   try {
     const url = new URL(req.url, 'http://localhost');
