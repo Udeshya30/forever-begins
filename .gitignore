@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Local deployment/cloud state and generated archives
+/.vercel/
+/.aws/
+/coverage/
+/*.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -23,9 +29,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Temporary photo-import metadata and originals
-/tmp/drive-import/
-/tmp/drive-setup/
+# Temporary captures, photo-import metadata, and private generated scripts
+/tmp/
 
 # Server-only credentials
 .env
